@@ -1,6 +1,7 @@
 import React from 'react'
 import GoogleMap from './GoogleMap';
 import AutoComplete from './AutoComplete';
+import '../../../MainContent.css';
 
 const MainContent = () => {
   return (
