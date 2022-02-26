@@ -7,17 +7,32 @@ import MapPinEnd from '../../../ImageAssets/pin2.png';
 const StartAnyReactComponent = ({ text }) => <div><img src={MapPinStart} style={{height: "30px", width: "30px", transform: "translate(-15px, -15px)"}}></img></div>;
 const EndAnyReactComponent = ({ text }) => <div><img src={MapPinEnd} style={{height: "30px", width: "30px", transform: "translate(-15px, -15px)"}}></img></div>;
 
+
+
 const GoogleMap = observer(({ store }) => {
 
+    useEffect(() => {
+        console.log("type", typeof store.storeMap);
+        // store.setStoreMap({});
+        apiIsLoaded(store.storeMap);
+      }, [store.startLat]);
+ 
+    const defaultProps = {
+        center: {
+          lat: -33.879007,
+          lng: 151.2051831,
+        },
+        zoom: 12
+      };
 
-    const apiIsLoaded = (map, maps) => {
+      const apiIsLoaded = (map) => {
         console.log("heheherere");
         const directionsService = new window.google.maps.DirectionsService();
         const directionsRenderer = new window.google.maps.DirectionsRenderer();
         directionsRenderer.setMap(map);
-        const origin = { lat: -33.879007, lng: 151.2051831 };
-        const destination = { lat: -33.889007, lng: 151.2251831 };
-  
+        const origin = { lat: store.startLat, lng: store.startLong };
+        const destination = { lat: store.endLat, lng: store.endLong };
+    
         directionsService.route(
           {
             origin: origin,
@@ -36,31 +51,31 @@ const GoogleMap = observer(({ store }) => {
         );
       };
 
-    const defaultProps = {
-        center: {
-          lat: -33.879007,
-          lng: 151.2051831,
-        },
-        zoom: 12
-      };
-
   return (
-    <div style={{ height: '100vh', width: '100%' }}>
+    <div style={{ height: '80vh', width: '70%' }}>
     <GoogleMapReact
       bootstrapURLKeys={{ key: "AIzaSyDOfn3Dk7W6Xrae1nPf7fNITiyJvtUQCXQ" }}
       defaultCenter={defaultProps.center}
       defaultZoom={defaultProps.zoom}
+      
       yesIWantToUseGoogleMapApiInternals
-            onGoogleApiLoaded={(store.startStatus == false && store.endStatus == false) ? ({ map, maps }) => apiIsLoaded(map, maps) : console.log("ll")}
+            onGoogleApiLoaded={store.renderRoute ? ({ map }) => {
+                apiIsLoaded(map); 
+                store.setStoreMap(map);
+                if (store.initialMapStatus == "false") {
+                    store.setInitialMap(map);
+                    store.setInitalMapStatus();
+                }
+            } : console.log("not Rendering the route")}
     >
       <StartAnyReactComponent
-        lat={-33.879007}
-        lng={151.2051831}
+        lat={store.startLat}
+        lng={store.startLong}
         text={'A'}
       />
       <EndAnyReactComponent
-        lat={-33.889007}
-        lng={151.2251831}
+        lat={store.endLat}
+        lng={store.endLong}
         text={'B'}
       />
     </GoogleMapReact>

@@ -11,7 +11,7 @@ const AutoComplete = () => {
     const [value, setValue] = useState(null);
 
   return (
-    <div style={{width: "70vw"}}>
+    <div style={{width: "20vw"}}>
     <GooglePlacesAutocomplete
       selectProps={{
         value,
