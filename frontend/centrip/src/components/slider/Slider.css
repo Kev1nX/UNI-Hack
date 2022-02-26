@@ -1,0 +1,55 @@
+.slider {
+    width: 80%;
+    height: 90vh;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 50%;
+    opacity: 0;
+    transform: translateX(-50%);
+    transition: all 0.5s ease;
+  }
+  
+  @media screen and (min-width: 600px) {
+    .slide img {
+      width: 50%;
+      height: 50%;
+      margin-right: 10px ;
+    }
+  }
+  
+  .slide img {
+
+    height: 50%;
+  }
+  
+  .current {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .content > * {
+    color: #fff;
+    margin-bottom: 1rem;
+  }  
+  
+  .next {
+    top: 35%;
+    right: 1.5rem;
+  }
+  .prev {
+    top: 35%;
+    left: 1.5rem;
+  }
+  
+  hr {
+    height: 2px;
+    background: white;
+    width: 50%;
+  }
