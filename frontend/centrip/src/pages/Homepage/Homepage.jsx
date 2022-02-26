@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
+import MainContent from './MainContent/MainContent';
 
 const Homepage = () => {
   return (
-    <div>Homepage</div>
+    <div>
+        <p>Homepage</p>
+        <MainContent/>
+    </div>
   )
 }
 
