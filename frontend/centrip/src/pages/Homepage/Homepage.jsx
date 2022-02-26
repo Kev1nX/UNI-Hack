@@ -4,7 +4,6 @@ import MainContent from './MainContent/MainContent';
 const Homepage = () => {
   return (
     <div>
-        <p>Homepage</p>
         <MainContent/>
     </div>
   )

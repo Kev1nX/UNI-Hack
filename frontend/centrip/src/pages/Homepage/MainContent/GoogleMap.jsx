@@ -46,7 +46,7 @@ class GoogleMap extends Component {
       };
     return (
       // Important! Always set the container height explicitly
-      <div style={{ height: '100vh', width: '100%' }}>
+      <div style={{ height: '75vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyDOfn3Dk7W6Xrae1nPf7fNITiyJvtUQCXQ" }}
           defaultCenter={this.props.center}
