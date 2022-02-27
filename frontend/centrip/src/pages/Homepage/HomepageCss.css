@@ -10,17 +10,20 @@
     margin-bottom: 100px;
 }
 h2{
-    font-size: xx-large;
+    font-size: 50px;
 }
 p{
     font-size: x-large;
+}
+.tagline{
+    margin-left:80px
 }
 .header{
     display: flex;
     flex-direction: column;
     margin-left: 10vw;
     margin-top: 100px;
-    margin-bottom: 220px;
+    margin-bottom: 250px;
 }
 h1 {
     font-size: 60px;

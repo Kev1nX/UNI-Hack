@@ -9,11 +9,14 @@ const Homepage = observer(({ store }) => {
     height: "450px",
     objectFit: "cover",
   };
+  const logo = {
+    width:"250px"
+  };
   return (
     <div>
       <div className='header'>
-        <h1>Centrip</h1>
-        <p>Saving you money wherever you go</p>
+        <img style= {logo}src ={require("../../ImageAssets/Logo.png")}></img>
+        <p className='tagline'>Saving you money wherever you go</p>
       </div>
 
         <img style= {mystyle}src ={require("../../ImageAssets/background.jpg")}></img>
