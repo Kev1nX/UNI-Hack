@@ -47,8 +47,10 @@ export class SearchPresenter {
             setStoreMap: action,
             setInitialMap: action,
             setInitalMapStatus: action,
+            setDestCoor: action,
 
             // api calls
+            getPlaceCoord: action,
         })
 
         this.rootStore = rootStore;
@@ -80,8 +82,8 @@ export class SearchPresenter {
     }
 
     setEndCoor(long, lat) {
-        this.longLat = lat;
-        this.startLong = long;
+        this.endLong = long;
+        this.endLat = lat;
     }
 
     setSelectedOption(option) {
@@ -105,4 +107,29 @@ export class SearchPresenter {
         this.endStatus = false;
     }
 
+    setDestCoor(results, type) {
+        console.log("rrt", typeof this.startLat);
+        if (type == "start_dest") {
+            this.setStartCoor(results[0].long, results[0].lat)
+        } else {
+            this.setEndCoor(results[0].long, results[0].lat);
+            
+        }
+        console.log("taipe", typeof results[0].lat);
+    }
+
+    getPlaceCoord(place_id, type) {
+        axios({
+            method: 'get',
+            url: `http://localhost:4000/home/${place_id}`,
+        })
+        .then((response) => {
+            console.log(response.data);
+            this.setDestCoor(response.data, type);
+            // this.setPostsTags(response.data);
+        })
+        .catch((e) => {
+            console.log(e);
+        })
+    }
 }

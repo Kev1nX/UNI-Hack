@@ -7,15 +7,20 @@ import MapPinEnd from '../../../ImageAssets/pin2.png';
 const StartAnyReactComponent = ({ text }) => <div><img src={MapPinStart} style={{height: "30px", width: "30px", transform: "translate(-15px, -15px)"}}></img></div>;
 const EndAnyReactComponent = ({ text }) => <div><img src={MapPinEnd} style={{height: "30px", width: "30px", transform: "translate(-15px, -15px)"}}></img></div>;
 
+const directionsRenderer = new window.google.maps.DirectionsRenderer();
+const directionsService = new window.google.maps.DirectionsService();
 
-
-const GoogleMap = observer(({ store }) => {
+const GoogleMap = observer(({ store, opt }) => {
 
     useEffect(() => {
         console.log("type", typeof store.storeMap);
         // store.setStoreMap({});
-        apiIsLoaded(store.storeMap);
-      }, [store.startLat]);
+        if (store.selectedOption == opt) {
+            apiIsLoaded(store.storeMap)
+        }
+        
+        // apiIsLoaded(null);
+      }, [store.startLat, store.startLong, store.endLat, store.endLong]);
  
     const defaultProps = {
         center: {
@@ -27,9 +32,11 @@ const GoogleMap = observer(({ store }) => {
 
       const apiIsLoaded = (map) => {
         console.log("heheherere");
-        const directionsService = new window.google.maps.DirectionsService();
-        const directionsRenderer = new window.google.maps.DirectionsRenderer();
-        directionsRenderer.setMap(map);
+        
+        
+        directionsRenderer.setMap(null);
+        directionsRenderer.setDirections({routes: []});
+        // directionsRenderer.setMap(map);
         const origin = { lat: store.startLat, lng: store.startLong };
         const destination = { lat: store.endLat, lng: store.endLong };
     
@@ -42,6 +49,7 @@ const GoogleMap = observer(({ store }) => {
           },
           (result, status) => {
             if (status === window.google.maps.DirectionsStatus.OK) {
+                directionsRenderer.setMap(map);
               directionsRenderer.setDirections(result);
               console.log(result);
             } else {

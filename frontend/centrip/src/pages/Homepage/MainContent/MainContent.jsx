@@ -29,30 +29,32 @@ const MainContent = observer(({ store }) => {
         if (option == "cost") {
             console.log("changed coord");
             store.setRenderRoute(true);
-            store.setStartCoor(store.startLong - 0.01, store.startLat - 0.01);
         } else if (option == "time") {
             store.setRenderRoute(true);
-            store.setStartCoor(store.startLong + 0.01, store.startLat + 0.01);
         }
         store.setSelectedOption(option);
         console.log("selectedOption: ", option);
     }
 
+    const testAPI = () => {
+        //Call API here
+        store.getTrasitFee();
+    };
+
     if (store.selectedOption == "none") {
         return (
             <div className="main-content-root">
-                {/* <button onClick={() => handleStatus()}>btn</button> */}
         
                 <div className="main-content-container">
                     <div className="main-content-input">
                         <h1 style={{textAlign: "center", fontSize: "20px", marginTop: "8vh"}}>Enter start point and destination</h1>   
                         <div className="input-style">
                             <img src={Circle} style={{height: "23px", width: "23px"}}/>
-                            <AutoComplete id="start_dest"/>
+                            <AutoComplete store={store} type={"start_dest"}/>
                         </div>             
                         <div className="input-style">
                             <img src={Pinb} style={{height: "23px", width: "23px"}}/>
-                            <AutoComplete id = "end_dest"/>
+                            <AutoComplete store={store} type={"end_dest"}/>
                         </div>
                         <div className="option-root">
                             <button onClick={() => {handleButtonOption("cost")}}>Cost</button>
@@ -60,7 +62,7 @@ const MainContent = observer(({ store }) => {
                             <button onClick={() => handleButtonOption("loading")}>Efficient</button>
                         </div>          
                     </div>
-                    <GoogleMap store={store}/>
+                    <GoogleMap store={store} opt={"none"}/>
                 </div>
                 
             </div>
@@ -77,11 +79,11 @@ const MainContent = observer(({ store }) => {
                         <h1 style={{textAlign: "center", fontSize: "20px", marginTop: "8vh"}}>Enter start point and destination</h1>   
                         <div className="input-style">
                             <img src={Circle} style={{height: "23px", width: "23px"}}/>
-                            <AutoComplete id="start_dest"/>
+                            <AutoComplete store={store} type={"start_dest"}/>
                         </div>             
                         <div className="input-style">
                             <img src={Pinb} style={{height: "23px", width: "23px"}}/>
-                            <AutoComplete id = "end_dest"/>
+                            <AutoComplete store={store} type={"end_dest"}/>
                         </div>
                         <div className="option-root">
                             <button onClick={() => handleButtonOption("cost")}>Cost</button>
@@ -89,7 +91,7 @@ const MainContent = observer(({ store }) => {
                             <button onClick={() => handleButtonOption("loading")}>Efficient</button>
                         </div>          
                     </div>
-                    <GoogleMap store={store}/>
+                    <GoogleMap store={store} opt={"cost"}/>
                 </div>
                 
             </div>
@@ -106,11 +108,11 @@ const MainContent = observer(({ store }) => {
                         <h1 style={{textAlign: "center", fontSize: "20px", marginTop: "8vh"}}>Enter start point and destination</h1>   
                         <div className="input-style">
                             <img src={Circle} style={{height: "23px", width: "23px"}}/>
-                            <AutoComplete id="start_dest"/>
+                            <AutoComplete store={store} type={"start_dest"}/>
                         </div>             
                         <div className="input-style">
                             <img src={Pinb} style={{height: "23px", width: "23px"}}/>
-                            <AutoComplete id = "end_dest"/>
+                            <AutoComplete store={store} type={"end_dest"}/>
                         </div>
                         <div className="option-root">
                             <button onClick={() => handleButtonOption("cost")}>Cost</button>
@@ -118,7 +120,7 @@ const MainContent = observer(({ store }) => {
                             <button onClick={() => handleButtonOption("loading")}>Efficient</button>
                         </div>          
                     </div>
-                    <GoogleMap store={store}/>
+                    <GoogleMap store={store} opt={"time"}/>
                 </div>
                 
             </div>
@@ -135,11 +137,11 @@ const MainContent = observer(({ store }) => {
                         <h1 style={{textAlign: "center", fontSize: "20px", marginTop: "8vh"}}>Enter start point and destination</h1>   
                         <div className="input-style">
                             <img src={Circle} style={{height: "23px", width: "23px"}}/>
-                            <AutoComplete id="start_dest"/>
+                            <AutoComplete store={store} type={"start_dest"}/>
                         </div>             
                         <div className="input-style">
                             <img src={Pinb} style={{height: "23px", width: "23px"}}/>
-                            <AutoComplete id = "end_dest"/>
+                            <AutoComplete store={store} type={"end_dest"}/>
                         </div>
                         <div className="option-root">
                             <button onClick={() => handleButtonOption("cost")}>Cost</button>
@@ -147,7 +149,7 @@ const MainContent = observer(({ store }) => {
                             <button onClick={() => handleButtonOption("loading")}>Efficient</button>
                         </div>          
                     </div>
-                    <GoogleMap store={store}/>
+                    <GoogleMap store={store} opt={"efficient"}/>
                 </div>
                 
             </div>
